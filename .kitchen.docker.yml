@@ -3,8 +3,6 @@ driver:
   name: docker
 ## https://github.com/test-kitchen/kitchen-docker/issues/54
   use_sudo: false
-## for systemd/centos7
-  privileged: true
 
 transport:
   name: sftp
@@ -29,6 +27,13 @@ platforms:
   - name: ubuntu-16.04
   - name: ubuntu-14.04
   - name: centos-7
+#    driver_config:
+##      image: centos/systemd
+#      image: centos:7
+#      platform: centos
+#      privileged: true
+#      volume:
+#        - /sys/fs/cgroup
 ### epel mirror issue. see readme
 #  - name: centos-6
 ### Ansible 2.2+/cryptography: https://github.com/ansible/ansible/issues/276
