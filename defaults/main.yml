@@ -1,0 +1,38 @@
+---
+
+up1_user: www-up1
+up1_home: '/var/www-up1'
+
+up1_working_dir: "{{ up1_home }}/src"
+
+up1_http_enable: true
+## If using 80/443 aka privileged port, nodejs must be executed as root.
+##  Better to use a reverse proxy
+up1_http_port: 8080
+
+up1_https_enable: false
+up1_https_port: 443
+up1_https_cert_path: './cert.pem'
+up1_https_key_path: './key.pem'
+
+up1_cloudflarecacheinvalidate_enable: false
+up1_cloudflarecacheinvalidate_apitoken: 'xxxx'
+up1_cloudflarecacheinvalidate_email: 'xxxx'
+up1_cloudflarecacheinvalidate_domain: 'xxxx'
+
+up1_email_contact: 'someemail@email'
+
+## Max: 50MB
+up1_max_file_size: 50000000
+
+## if not defined or empty, a random one will be generated with openssl
+#up1_api_key: 'c61540b5ceecd05092799f936e27755f'
+up1_api_key: ''
+up1_delete_key: ''
+
+up1_cron_expiry: true
+up1_cron_expiry_schedule_min: 8
+up1_cron_expiry_schedule_hour: 1
+up1_cron_expiry_schedule_day: '*'
+up1_cron_expiry_schedule_weekday: 1
+

@@ -1,0 +1,8 @@
+---
+
+nodejs_path: /usr/bin/nodejs
+
+up1_pkg_deps:
+    - nodejs
+    - npm
+    - cron

@@ -1,0 +1,30 @@
+{
+  "api_key": "{{ up1_api_key }}",
+  "delete_key": "{{ up1_delete_key }}",
+  "maximum_file_size": {{ up1_max_file_size }},
+
+  "path": {
+    "i": "../i",
+    "client": "../client"
+  },
+
+  "http": {
+    "enabled": {{ up1_http_enable | lower }},
+    "listen": ":{{ up1_http_port }}"
+  },
+
+  "https": {
+    "enabled": {{ up1_https_enable | lower }},
+    "listen": ":{{ up1_https_port }}",
+    "cert": "{{ up1_https_cert_path }}",
+    "key": "{{ up1_https_key_path }}"
+  },
+
+  "cloudflare-cache-invalidate": {
+    "enabled": {{ up1_cloudflarecacheinvalidate_enable | lower }},
+    "token": "{{ up1_cloudflarecacheinvalidate_apitoken }}",
+    "email": "{{ up1_cloudflarecacheinvalidate_email }}",
+    "domain": "{{ up1_cloudflarecacheinvalidate_domain }}"
+  }
+}
+

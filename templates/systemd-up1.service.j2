@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Up1 Node.js service
+
+[Service]
+ExecStart={{ nodejs_path}} {{ up1_working_dir }}/server/server.js
+WorkingDirectory={{ up1_working_dir }}/server
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+SyslogIdentifier=up1-nodejs
+User={{ up1_user }}
+Group=nobody
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+

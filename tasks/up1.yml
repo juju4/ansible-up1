@@ -1,0 +1,65 @@
+---
+
+- name: ensure up1 dependencies are present
+  package: name={{ item }} state=present
+  with_items: "{{ up1_pkg_deps }}"
+
+- name: ensure up1 user exists
+  user:
+    name: "{{ up1_user }}"
+    home: "{{ up1_home }}"
+
+- name: git clone up1 repository
+  git:
+    repo: https://github.com/Upload/Up1
+    dest: "{{ up1_working_dir }}"
+  become: yes
+  become_user: "{{ up1_user }}"
+
+- block:
+    - include: "random.yml name=api"
+    - set_fact:
+        up1_api_key: "{{ salt }}"
+  when: up1_api_key is not defined or up1_api_key == ''
+- block:
+    - include: "random.yml name=delete"
+    - set_fact:
+        up1_delete_key: "{{ salt }}"
+  when: up1_delete_key is not defined or up1_delete_key == ''
+
+- name: install server configuration
+  template:
+    src: server.conf.j2
+    dest: "{{ up1_working_dir }}/server/server.conf"
+    mode: '0644'
+    backup: yes
+
+- name: install client configuration
+  template:
+    src: client-config.js.j2
+    dest: "{{ up1_working_dir }}/client/config.js"
+    mode: '0644'
+    backup: yes
+
+- name: Install up1 npm packages 
+  npm:
+    path: "{{ up1_working_dir }}/server"
+
+- block:
+    - name: install systemd configuration
+      template:
+        src: systemd-up1.service.j2
+#        dest: /etc/systemd/system/multi-user.target.wants/up1.service
+        dest: /lib/systemd/system/up1.service
+        mode: '0644'
+        backup: yes
+    - name: enable and start up1 systemd service
+      service:
+        name: up1
+        enabled: yes
+        state: 'started'
+      ignore_errors: true
+  when: ansible_service_mgr == 'systemd'
+
+- include: cron.yml
+
