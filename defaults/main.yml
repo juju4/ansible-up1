@@ -12,8 +12,13 @@ up1_http_port: 8080
 
 up1_https_enable: false
 up1_https_port: 443
-up1_https_cert_path: './cert.pem'
-up1_https_key_path: './key.pem'
+up1_https_cert_path: "{{ up1_home }}/{{ inventory_hostname }}.crt"
+up1_https_key_path: "{{ up1_home }}/{{ inventory_hostname }}.key"
+## if files doesn't exist, generate self-signed certificate?
+up1_https_selfsigned: true
+up1_certificate_cn: "{{ inventory_hostname }}"
+up1_certinfo: '/C=US/ST=CA/L=San Francisco/O=Ansible'
+up1_certduration: 365
 
 up1_cloudflarecacheinvalidate_enable: false
 up1_cloudflarecacheinvalidate_apitoken: 'xxxx'
@@ -36,3 +41,9 @@ up1_cron_expiry_schedule_hour: 1
 up1_cron_expiry_schedule_day: '*'
 up1_cron_expiry_schedule_weekday: 1
 
+## This will not install webservers, just push up1 virtualhost configuration
+#up1_reverseproxy: 'apache'
+#up1_reverseproxy: 'nginx'
+#up1_servername: up1.example.com
+#up1_serverlisten: 80
+#up1_serverlisten: 443

@@ -1,0 +1,23 @@
+
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "sameorigin"
+    #Header set X-Frame-Options "deny"
+    Header set Strict-Transport-Security "max-age=16070400; includeSubDomains"
+    #Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; style-src 'self'; object-src 'self';"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Up1
+    RequestHeader unset X-Forwarded-Proto
+    RequestHeader add X-Remote-Port %{R_P}e
+    # HTTPS only, but won't be used if you use HTTP. You can leave it.
+    RequestHeader set X-Forwarded-Proto https env=HTTPS
+
+    <Location />
+        # Adapt this to your configuration
+        ProxyPass http://{{ up1_origin }}/
+        ProxyPassReverse /
+        LimitRequestBody 104857600
+    </Location>
+

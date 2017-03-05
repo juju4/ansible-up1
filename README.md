@@ -52,7 +52,7 @@ $ vagrant ssh
 
 ## Troubleshooting & Known issues
 
-* systemd configuration is not working.
+* systemd configuration is not working on Xenial.
 Up1 can be start interactively
 ```
 # cd /var/www-up1/src/server && sudo -H -u www-up1 /usr/bin/nodejs /var/www-up1/src/server/server.js
@@ -68,6 +68,7 @@ An optional cron has been added as a workaround
 
 * Currently, no upstart config for Trusty
 
+* Reverseproxy configuration: only nginx tested. Apache config for reference.
 
 ## License
 

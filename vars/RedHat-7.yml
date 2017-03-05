@@ -6,3 +6,7 @@ up1_pkg_deps:
     - nodejs
     - npm
     - crontabs
+
+ssl_user: root
+ssl_dir: /etc/pki/tls
+ssl_privatedir: /etc/pki/tls/private

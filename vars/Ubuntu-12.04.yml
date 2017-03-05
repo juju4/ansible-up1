@@ -6,3 +6,8 @@ up1_pkg_deps:
     - nodejs
     - npm
     - cron
+
+ssl_user: ssl-cert
+ssl_dir: /etc/ssl
+ssl_privatedir: /etc/ssl/private
+nginx_sitedir: /etc/nginx/sites-available

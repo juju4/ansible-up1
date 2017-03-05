@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: juju4
-  description: TEMPLATE
+  description: Up1, Client-side Encrypted Image Host
   license: BSD
   min_ansible_version: 2.0
   #
@@ -12,7 +12,6 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-     - 6
      - 7
   - name: Ubuntu
     versions:
@@ -24,7 +23,7 @@ galaxy_info:
   #
   galaxy_tags:
   - system
-  - security
+  - web
 dependencies: []
   # List your role dependencies here, one per line. Only
   # dependencies available via galaxy should be listed here.

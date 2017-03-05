@@ -27,6 +27,9 @@
         up1_delete_key: "{{ salt }}"
   when: up1_delete_key is not defined or up1_delete_key == ''
 
+- include: certificate-selfsigned.yml
+  when: up1_https_enable and up1_https_selfsigned
+
 - name: install server configuration
   template:
     src: server.conf.j2
@@ -62,4 +65,5 @@
   when: ansible_service_mgr == 'systemd'
 
 - include: cron.yml
+- include: reverseproxy.yml
 

@@ -1,0 +1,28 @@
+---
+
+- name: install up1 nginx reverseproxy configuration
+  template:
+    src: up1-nginx.conf.j2
+    dest: "{{ nginx_sitedir }}/up1.conf"
+    mode: '0644'
+    backup: yes
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx'
+  notify:
+    - restart nginx
+- name: Debian | enable nginx reverseproxy
+  file:
+    src: "{{ nginx_sitedir }}/up1.conf"
+    dest: "/etc/nginx/sites-enabled/up1.conf"
+    state: 'link'
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx' and ansible_os_family == 'Debian'
+  notify:
+    - restart nginx
+
+- name: install up1 apache reverseproxy configuration
+  template:
+    src: up1-apache.conf.j2
+    dest: "{{ apache_sitedir }}/up1.conf"
+    mode: '0644'
+    backup: yes
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache'
+
