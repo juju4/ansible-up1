@@ -6,6 +6,8 @@ up1_pkg_deps:
     - nodejs
     - npm
     - crontabs
+# https://bugzilla.redhat.com/show_bug.cgi?id=1457763
+    - nodejs010-http-parser
 
 ssl_user: root
 ssl_dir: /etc/pki/tls
