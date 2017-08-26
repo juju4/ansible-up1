@@ -1,8 +1,19 @@
 ---
 
-- name: ensure up1 dependencies are present
-  package: name={{ item }} state=present
-  with_items: "{{ up1_pkg_deps }}"
+- block:
+    - name: Debian | ensure up1 dependencies are present
+      apt: name={{ item }} state=present
+      with_items: "{{ up1_pkg_deps }}"
+  when: ansible_os_family == 'Debian'
+
+- block:
+    - name: RedHat | ensure up1 dependencies are present
+      yum:
+        name: "{{ item }}"
+        state: present
+        enablerepo: epel-testing
+      with_items: "{{ up1_pkg_deps }}"
+  when: ansible_os_family == 'RedHat'
 
 - name: ensure up1 user exists
   user:
