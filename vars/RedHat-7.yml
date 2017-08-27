@@ -9,6 +9,8 @@ up1_pkg_deps:
 # https://bugzilla.redhat.com/show_bug.cgi?id=1457763
 # https://bugzilla.redhat.com/show_bug.cgi?id=1473088
 #    - nodejs010-http-parser
+## 7.4 only?
+    - http-parser
 
 ssl_user: root
 ssl_dir: /etc/pki/tls
