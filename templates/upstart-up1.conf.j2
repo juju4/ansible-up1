@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+# custom upstart job definition for up1
+
+description "up1 daemon"
+
+start on runlevel [12345]
+stop on runlevel [06]
+
+expect fork
+
+env NODE_ENV=production
+
+script
+  test -f /etc/default/up1 && . /etc/default/up1
+
+  echo "up1 started"
+  # http://upstart.ubuntu.com/cookbook/#run-a-job-as-a-different-user
+  exec start-stop-daemon --start -c {{ up1_user }} --exec {{ nodejs_path}} {{ up1_working_dir }}/server/server.js
+end script

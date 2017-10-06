@@ -83,6 +83,17 @@
       ignore_errors: true
 #  when: ansible_service_mgr == 'systemd'
   when: ansible_distribution_release == 'xenial' or (ansible_os_family == "RedHat" and ansible_distribution_major_version == '7')
+- block:
+    - name: Lufi | Copy upstart service config
+      template:
+        src: upstart-up1.conf.j2
+        dest: /etc/init/up1.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - restart up1
+  when: ansible_distribution_release == 'trusty'
 
 - include: cron.yml
 - include: reverseproxy.yml
