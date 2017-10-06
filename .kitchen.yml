@@ -36,4 +36,9 @@ suites:
   - name: default
     run_list:
     attributes:
-
+  - name: default-apache
+    run_list:
+    attributes:
+  - name: default-nginx
+    run_list:
+    attributes:

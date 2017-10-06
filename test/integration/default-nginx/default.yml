@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  vars:
+    - up1_reverseproxy: 'nginx'
+    - up1_reverseproxy_https: true
+    - up1_servername: up1.example.com
+    - up1_serverlisten: 1443
+    - up1_origin: 127.0.0.1:8080
+  roles:
+    - geerlingguy.nginx
+    - juju4.harden-nginx
+    - juju4.up1
