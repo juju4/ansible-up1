@@ -10,12 +10,12 @@
 
   "http": {
     "enabled": {{ up1_http_enable | lower }},
-    "listen": ":{{ up1_http_port }}"
+    "listen": "{{ up1_http_listen }}"
   },
 
   "https": {
     "enabled": {{ up1_https_enable | lower }},
-    "listen": ":{{ up1_https_port }}",
+    "listen": "{{ up1_https_listen }}",
     "cert": "{{ up1_https_cert_path }}",
     "key": "{{ up1_https_key_path }}"
   },

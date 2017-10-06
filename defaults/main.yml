@@ -8,10 +8,12 @@ up1_working_dir: "{{ up1_home }}/src"
 up1_http_enable: true
 ## If using 80/443 aka privileged port, nodejs must be executed as root.
 ##  Better to use a reverse proxy
-up1_http_port: 8080
+up1_http_listen: "localhost:8080"
+#up1_http_listen: ":8080"
 
+## native https by up1/node
 up1_https_enable: false
-up1_https_port: 443
+up1_https_listen: "localhost:443"
 up1_https_cert_path: "{{ up1_home }}/{{ inventory_hostname }}.crt"
 up1_https_key_path: "{{ up1_home }}/{{ inventory_hostname }}.key"
 ## if files doesn't exist, generate self-signed certificate?
@@ -41,9 +43,26 @@ up1_cron_expiry_schedule_hour: 1
 up1_cron_expiry_schedule_day: '*'
 up1_cron_expiry_schedule_weekday: 1
 
-## This will not install webservers, just push up1 virtualhost configuration
+## This will not install webservers, just push up1 virtualhost or subdir configuration
 #up1_reverseproxy: 'apache'
 #up1_reverseproxy: 'nginx'
-#up1_servername: up1.example.com
+up1_reverseproxy_https: true
+up1_reverseproxy_https_conf: |
+    SSLEngine on
+    #Include /etc/httpd/harden-apache2-https.conf
+    SSLCertificateFile /path/to/localhost.crt
+    SSLCertificateKeyFile /path/to/localhost.key
+    CustomLog "logs/up1_access_log" combined
+    ErrorLog "logs/up1_error_log"
+up1_servername: up1.example.com
+up1_origin: 127.0.0.1:8080
+up1_virtualhost: true
 #up1_serverlisten: 80
-#up1_serverlisten: 443
+up1_serverlisten: 1443
+up1_prefix: "/"
+#up1_virtualhost: false
+#up1_prefix: "/up1"
+
+# if empty, not applied
+#up1_csp: ""
+up1_csp: "default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; style-src 'self'; object-src 'self';"

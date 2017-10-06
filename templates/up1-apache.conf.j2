@@ -1,3 +1,12 @@
+{% if up1_virtualhost %}
+Listen {{ up1_serverlisten }} {% if up1_reverseproxy_https %}https{% endif %}
+
+<Virtualhost {{ up1_servername }}:{{ up1_serverlisten }}>
+{% endif %}
+
+{% if up1_reverseproxy_https %}
+{{ up1_reverseproxy_https_conf }}
+{% endif %}
 
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "sameorigin"
@@ -5,19 +14,27 @@
     Header set Strict-Transport-Security "max-age=16070400; includeSubDomains"
     #Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
     Header set X-XSS-Protection "1; mode=block"
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; style-src 'self'; object-src 'self';"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
+{% if up1_csp is defined and up1_csp != '' %}
+    Header set Content-Security-Policy "{{ up1_csp }}"
+{% endif %}
+    #Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Referrer-Policy "origin"
 
     # Up1
     RequestHeader unset X-Forwarded-Proto
     RequestHeader add X-Remote-Port %{R_P}e
+{% if up1_reverseproxy_https %}
     # HTTPS only, but won't be used if you use HTTP. You can leave it.
     RequestHeader set X-Forwarded-Proto https env=HTTPS
+{% endif %}
 
-    <Location />
+    <Location {{ up1_prefix }}>
         # Adapt this to your configuration
-        ProxyPass http://{{ up1_origin }}/
-        ProxyPassReverse /
+        ProxyPass http://{{ up1_origin }}{{ up1_prefix }}
+        ProxyPassReverse {{ up1_prefix }}
         LimitRequestBody 104857600
     </Location>
 
+{% if up1_virtualhost %}
+</Virtualhost>
+{% endif %}

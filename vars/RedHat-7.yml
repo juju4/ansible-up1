@@ -13,5 +13,9 @@ up1_pkg_deps:
     - http-parser
 
 ssl_user: root
-ssl_dir: /etc/pki/tls
+ssl_dir: /etc/pki/tls/certs
 ssl_privatedir: /etc/pki/tls/private
+apache_svc: httpd
+apache_confdir: /etc/httpd/conf.d
+apache_sitedir: /etc/httpd/conf.d
+apacheconf: /etc/httpd/conf/httpd.conf

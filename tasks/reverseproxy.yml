@@ -1,5 +1,14 @@
 ---
 
+- name: Debian | Ensure required apache modules are loaded
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - headers
+    - proxy
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
+
 - name: install up1 nginx reverseproxy configuration
   template:
     src: up1-nginx.conf.j2
@@ -9,6 +18,7 @@
   when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx'
   notify:
     - restart nginx
+
 - name: Debian | enable nginx reverseproxy
   file:
     src: "{{ nginx_sitedir }}/up1.conf"
@@ -26,3 +36,11 @@
     backup: yes
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache'
 
+- name: Debian | enable up1 apache reverseproxy configuration
+  file:
+    src: "{{ apache_sitedir }}/up1.conf"
+    dest: "/etc/apache2/sites-enabled/up1.conf"
+    state: 'link'
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
+  notify:
+    - restart apache
