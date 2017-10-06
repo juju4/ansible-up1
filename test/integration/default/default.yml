@@ -2,8 +2,8 @@
 
 - hosts: all
 #- hosts: test-kitchen
-#  vars:
-#    - a:
+  vars:
+    - up1_testing: true
   roles:
     - juju4.up1
 

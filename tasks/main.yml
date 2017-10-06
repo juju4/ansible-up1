@@ -12,3 +12,5 @@
 
 - include: up1.yml
 
+- include: testing.yml
+  when: up1_testing

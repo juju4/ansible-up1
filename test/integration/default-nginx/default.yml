@@ -7,6 +7,7 @@
     - up1_servername: up1.example.com
     - up1_serverlisten: 1443
     - up1_origin: 127.0.0.1:8080
+    - up1_testing: true
   roles:
     - geerlingguy.nginx
     - juju4.harden-nginx

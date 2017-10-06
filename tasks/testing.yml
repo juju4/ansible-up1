@@ -1,0 +1,10 @@
+---
+
+- name: Ensure testing tools are present
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iproute2
+    - net-tools
+    - curl
