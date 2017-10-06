@@ -4,23 +4,32 @@
 
 - name: ensure openssl is present
   package: name=openssl state=present
+
 - name: Generating salt
   shell: "openssl rand -base64 32 | sed 's@[=\\/\\+]@@g;'| tee {{ secretdir }}/.up1_secrets-{{ name }} creates={{ secretdir }}/.up1_secrets-{{ name }}"
   register: secrets
   changed_when: false
+  no_log: true
+
 - stat: path="{{ secretdir }}/.up1_secrets-{{ name }}"
   register: s
+
 - name: Recover existing salt
   command: "cat {{ secretdir }}/.up1_secrets-{{ name }}"
   changed_when: false
   register: s2
   when: s.stat.exists
+  no_log: true
+
 - set_fact:
     salt: "{{ secrets.stdout_lines.0 }}"
   when: secrets.changed
+  no_log: true
+
 - set_fact:
     salt: "{{ s2.stdout_lines.0 }}"
   when: s.stat.exists
+  no_log: true
 
 #- debug: var=secrets
 #- debug: var=salt
