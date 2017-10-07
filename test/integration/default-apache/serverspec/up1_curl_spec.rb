@@ -19,7 +19,5 @@ describe command("curl -kvL http://localhost:#{up1_port}") do
   its(:stdout) { should match /<title>Up1<\/title>/ }
   its(:stdout) { should match /The client side cryptography of this application requires that Javascript be enabled to view and upload files./ }
   its(:stdout) { should match /Source Code/ }
-  its(:stderr) { should match /X-Frame-Options: sameorigin/ }
-  its(:stderr) { should match /X-XSS-Protection: 1; mode=block/ }
   its(:exit_status) { should eq 0 }
 end
