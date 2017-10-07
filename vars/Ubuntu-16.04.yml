@@ -16,6 +16,7 @@ apacheetc: /etc/apache2
 apache_confdir: /etc/apache2/conf-available
 apache_sitedir: /etc/apache2/sites-available
 apacheconf: /etc/apache2/sites-available/000-default.conf
+apache_check: apache2ctl
 
 up1_testing_pkg:
     - iproute2

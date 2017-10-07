@@ -19,6 +19,7 @@ apache_svc: httpd
 apache_confdir: /etc/httpd/conf.d
 apache_sitedir: /etc/httpd/conf.d
 apacheconf: /etc/httpd/conf/httpd.conf
+apache_check: httpd
 nginx_sitedir: /etc/nginx/conf.d
 
 up1_testing_pkg:
