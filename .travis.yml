@@ -18,11 +18,12 @@ env:
     init: /lib/systemd/systemd
     run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
     suite: default
-  - distribution: ubuntu
-    version: 14.04
-    init: /sbin/init
-    run_opts: ""
-    suite: default
+## trusty stalling... https://travis-ci.org/juju4/ansible-up1/jobs/284734409
+#  - distribution: ubuntu
+#    version: 14.04
+#    init: /sbin/init
+#    run_opts: ""
+#    suite: default
 #  - distribution: ubuntu
 #    version: 12.04
 #    init: /sbin/init
