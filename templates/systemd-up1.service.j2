@@ -1,8 +1,10 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Up1 Node.js service
+Requires=network.target
 
 [Service]
+Type=simple
 ExecStart={{ nodejs_path}} {{ up1_working_dir }}/server/server.js
 WorkingDirectory={{ up1_working_dir }}/server
 Restart=always
@@ -12,6 +14,7 @@ SyslogIdentifier=up1-nodejs
 User={{ up1_user }}
 Group=nobody
 Environment=NODE_ENV=production
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
