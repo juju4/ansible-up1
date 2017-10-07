@@ -7,6 +7,7 @@
   with_items:
     - headers
     - proxy
+    - proxy_http
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
 
 - name: install up1 nginx reverseproxy configuration
