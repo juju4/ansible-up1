@@ -104,7 +104,7 @@ script:
 after_failure:
   # Check what happened on systemd systems.
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l --no-pager status up1.service'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm service up1 status | cat'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm SYSTEMD_PAGER="" service up1 status'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l --no-pager status apache2.service'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l --no-pager status httpd.service'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm journalctl -xe --no-pager'
