@@ -1,0 +1,11 @@
+# /etc/supervisor/conf.d/up1.conf
+
+[program:up1]
+command={{ nodejs_path}} {{ up1_working_dir }}/server/server.js
+directory={{ up1_working_dir }}/server
+stdout_logfile=/var/log/supervisor/up1.out
+autostart=true
+autorestart=true
+redirect_stderr=true
+user={{ up1_user }}
+stopsignal=QUIT

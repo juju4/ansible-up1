@@ -26,3 +26,7 @@ up1_testing_pkg:
     - iproute
     - net-tools
     - curl
+
+supervisor_confdir: /etc/supervisord.d
+supervisor_ext: ini
+supervisor_service: supervisord

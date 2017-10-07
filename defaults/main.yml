@@ -43,6 +43,8 @@ up1_cron_expiry_schedule_hour: 1
 up1_cron_expiry_schedule_day: '*'
 up1_cron_expiry_schedule_weekday: 1
 
+up1_supervisor_service: true
+
 ## This will not install webservers, just push up1 virtualhost or subdir configuration
 #up1_reverseproxy: 'apache'
 #up1_reverseproxy: 'nginx'

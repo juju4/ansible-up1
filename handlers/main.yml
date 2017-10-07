@@ -8,3 +8,6 @@
 
 - name: restart up1
   service: name=up1 state=restarted
+
+- name: supervisor update
+  service: name={{ supervisor_service }} state=restarted sleep=15

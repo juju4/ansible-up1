@@ -6,8 +6,6 @@ description "up1 daemon"
 start on runlevel [12345]
 stop on runlevel [06]
 
-expect fork
-
 env NODE_ENV=production
 
 script
