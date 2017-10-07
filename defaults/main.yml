@@ -56,6 +56,10 @@ up1_reverseproxy_https_conf: |
     SSLCertificateKeyFile /path/to/localhost.key
     CustomLog "logs/up1_access_log" combined
     ErrorLog "logs/up1_error_log"
+#up1_reverseproxy_https_conf: |
+#    #include /etc/nginx/harden-nginx-https;
+#    ssl_certificate /path/to/localhost.crt;
+#    ssl_certificate_key /path/to/localhost.key;
 up1_servername: up1.example.com
 up1_origin: 127.0.0.1:8080
 up1_virtualhost: true

@@ -7,7 +7,30 @@
     - up1_servername: up1.example.com
     - up1_serverlisten: 1443
     - up1_origin: 127.0.0.1:8080
+    - up1_reverseproxy_https_conf: |
+        include /etc/nginx/harden-nginx-https;
+        include /etc/nginx/harden-nginx-common;
+        ssl_certificate /etc/ssl/{{ ansible_fqdn }}.crt;
+        ssl_certificate_key /etc/ssl/private/{{ ansible_fqdn }}.key;
     - up1_testing: true
+  pre_tasks:
+# Can't set hostname in docker...
+    - name: set hostname before certificate creation
+      hostname:
+        name: "{{ up1_servername }}"
+      ignore_errors: true
+    - name: add servername to /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: '127.0.0.1 up1.example.com'
+      ignore_errors: true
+    - set_fact:
+        up1_reverseproxy_https_conf: |
+            include /etc/nginx/harden-nginx-https;
+            include /etc/nginx/harden-nginx-common;
+            ssl_certificate /etc/pki/tls/certs/{{ ansible_fqdn }}.crt;
+            ssl_certificate_key /etc/pki/tls/private/{{ ansible_fqdn }}.key;
+      when: ansible_os_family == "RedHat"
   roles:
     - geerlingguy.nginx
     - juju4.harden-nginx

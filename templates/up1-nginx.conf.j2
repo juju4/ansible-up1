@@ -7,6 +7,10 @@ server {
     access_log /var/log/nginx/up1.success.log;
     error_log /var/log/nginx/up1.error.log;
 
+{% if up1_reverseproxy_https %}
+{{ up1_reverseproxy_https_conf }}
+{% endif %}
+
     location / {
         # Add cache for static files
         if ($request_uri ~* ^/(img|css|font|js)/) {
