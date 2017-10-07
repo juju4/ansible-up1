@@ -5,3 +5,6 @@
 
 - name: restart nginx
   service: name=nginx state=restarted
+
+- name: restart up1
+  service: name=up1 state=restarted
