@@ -31,7 +31,7 @@ server {
         add_header Referrer-Policy origin;
 
         # Adapt this to your configuration (port, subdirectory (see below))
-        proxy_pass  http://{{ up1_origin }}{{ up1_prefix }};
+        proxy_pass  http://{{ up1_origin }}:{{ up1_http_listen | regex_replace('.*:', '') }}{{ up1_prefix }};
 
         proxy_http_version 1.1;
         proxy_set_header Host $host;
