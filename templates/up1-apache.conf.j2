@@ -32,7 +32,7 @@ Listen {{ up1_serverlisten }} {% if up1_reverseproxy_https %}https{% endif %}
 
     <Location {{ up1_prefix }}>
         # Adapt this to your configuration
-        ProxyPass http://{{ up1_origin }}:{{ up1_http_listen | regex_replace('.*:', '') }}{{ up1_prefix }}
+        ProxyPass http://{{ up1_origin }}{{ up1_prefix }}
         ProxyPassReverse {{ up1_prefix }}
         LimitRequestBody 104857600
     </Location>
