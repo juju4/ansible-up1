@@ -55,6 +55,16 @@
     - restart apache
   register: apachecfg
 
+# https://github.com/ansible/ansible/issues/16612
+- block:
+    - debug: var=ansible_selinux
+    - name: RedHat | Ensure selinux dependencies are present
+      package:
+        name: libselinux-python
+        state: present
+    - action: setup
+    - debug: var=ansible_selinux
+  when: ansible_os_family == "RedHat"
 - block:
     - name: RedHat | Ensure selinux dependencies are present
       package:
@@ -80,7 +90,7 @@
         setype: http_port_t
         state: present
       when: up1_serverlisten != 80 and up1_serverlisten != 443
-  when: ansible_os_family == "RedHat" and ansible_selinux
+  when: ansible_os_family == "RedHat" and ansible_selinux.status is defined and ansible_selinux.status != 'disabled'
 
 - name: Check apache configuration
   command: "{{ apache_check }} configtest"
