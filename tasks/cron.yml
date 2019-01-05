@@ -1,3 +1,4 @@
+---
 
 - name: up1 cron - clean files
   cron:

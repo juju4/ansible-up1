@@ -14,6 +14,7 @@
   git:
     repo: https://github.com/Upload/Up1
     dest: "{{ up1_working_dir }}"
+    version: "{{ up1_version | default('9fc501783bb0510b67a99d36a3cdc852cef47f5d') }}"
   become: yes
   become_user: "{{ up1_user }}"
 
