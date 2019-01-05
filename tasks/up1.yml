@@ -1,19 +1,9 @@
 ---
 
-- block:
-    - name: Debian | ensure up1 dependencies are present
-      apt: name={{ item }} state=present
-      with_items: "{{ up1_pkg_deps }}"
-  when: ansible_os_family == 'Debian'
-
-- block:
-    - name: RedHat | ensure up1 dependencies are present
-      yum:
-        name: "{{ item }}"
-        state: present
-        enablerepo: epel-testing
-      with_items: "{{ up1_pkg_deps }}"
-  when: ansible_os_family == 'RedHat'
+- name: ensure up1 dependencies are present
+  package: name={{ up1_pkg_deps }} state=present
+  register: pkg_result
+  until: pkg_result is success
 
 - name: ensure up1 user exists
   user:
@@ -29,14 +19,18 @@
 
 - block:
     - include: "random.yml name=api"
-    - set_fact:
+    - name: Set fact api key
+      set_fact:
         up1_api_key: "{{ salt }}"
-  when: up1_api_key is not defined or up1_api_key == ''
+      no_log: true
+  when: up1_api_key is not defined or not up1_api_key
 - block:
     - include: "random.yml name=delete"
-    - set_fact:
+    - name: Set fact delete key
+      set_fact:
         up1_delete_key: "{{ salt }}"
-  when: up1_delete_key is not defined or up1_delete_key == ''
+      no_log: true
+  when: up1_delete_key is not defined or not up1_delete_key
 
 - include: certificate-selfsigned.yml
   when: up1_https_enable and up1_https_selfsigned

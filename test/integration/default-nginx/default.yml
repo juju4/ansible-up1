@@ -33,5 +33,5 @@
       when: ansible_os_family == "RedHat"
   roles:
     - geerlingguy.nginx
-    - juju4.harden-nginx
+    - juju4.harden_nginx
     - juju4.up1

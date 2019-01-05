@@ -1,17 +1,23 @@
 
-- set_fact:
+- name: Set fact secretdir
+  set_fact:
     secretdir: "{{ up1_home }}"
 
 - name: ensure openssl is present
   package: name=openssl state=present
+  register: pkg_result
+  until: pkg_result is success
 
 - name: Generating salt
-  shell: "openssl rand -base64 32 | sed 's@[=\\/\\+]@@g;'| tee {{ secretdir }}/.up1_secrets-{{ name }} creates={{ secretdir }}/.up1_secrets-{{ name }}"
+  shell: "openssl rand -base64 32 | sed 's@[=\\/\\+]@@g;'| tee {{ secretdir }}/.up1_secrets-{{ name }}"
+  args:
+    creates: "{{ secretdir }}/.up1_secrets-{{ name }}"
   register: secrets
   changed_when: false
   no_log: true
 
-- stat: path="{{ secretdir }}/.up1_secrets-{{ name }}"
+- name: Check if existing secrets
+  stat: path="{{ secretdir }}/.up1_secrets-{{ name }}"
   register: s
 
 - name: Recover existing salt
@@ -21,16 +27,17 @@
   when: s.stat.exists
   no_log: true
 
-- set_fact:
+- name: Set fact salt
+  set_fact:
     salt: "{{ secrets.stdout_lines.0 }}"
   when: secrets.changed
   no_log: true
 
-- set_fact:
+- name: Set fact salt
+  set_fact:
     salt: "{{ s2.stdout_lines.0 }}"
   when: s.stat.exists
   no_log: true
 
 #- debug: var=secrets
 #- debug: var=salt
-

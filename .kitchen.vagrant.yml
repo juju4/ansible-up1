@@ -32,4 +32,3 @@ suites:
   - name: default-nginx
     run_list:
     attributes:
-

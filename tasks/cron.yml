@@ -11,4 +11,3 @@
 #    job: "wipe -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
     job: "rm -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
     cron_file: ansible_up1-clean
-

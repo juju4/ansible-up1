@@ -38,6 +38,5 @@
       when: ansible_os_family == "RedHat"
   roles:
     - geerlingguy.apache
-    - juju4.harden-apache
+    - juju4.harden_apache
     - juju4.up1
-

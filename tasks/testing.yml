@@ -2,6 +2,7 @@
 
 - name: Ensure testing tools are present
   package:
-    name: "{{ item }}"
+    name: "{{ up1_testing_pkg }}"
     state: present
-  with_items: "{{ up1_testing_pkg }}"
+  register: pkg_result
+  until: pkg_result is success

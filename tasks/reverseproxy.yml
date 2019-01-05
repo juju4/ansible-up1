@@ -62,6 +62,8 @@
       package:
         name: libselinux-python
         state: present
+      register: pkg_result
+      until: pkg_result is success
     - action: setup
     - debug: var=ansible_selinux
   when: ansible_os_family == "RedHat"
@@ -74,6 +76,8 @@
         - libselinux-python
         - libsemanage-python
         - policycoreutils-python
+      register: pkg_result
+      until: pkg_result is success
 
     - name: RedHat | Allow proxy to network connect in selinux
       seboolean:
