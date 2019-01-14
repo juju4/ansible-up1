@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+{{ ansible_managed | comment }}
 
 {% if up1_virtualhost %}
 Listen {{ up1_serverlisten }} {% if up1_reverseproxy_https %}https{% endif %}
