@@ -50,6 +50,17 @@
     mode: '0644'
     backup: yes
 
+- name: update up1 npm dependencies to fix deprecated one
+  replace:
+    dest: "{{ up1_working_dir }}/server/package.json"
+    regexp: "{{ item.re }}"
+    replace: "{{ item.rep }}"
+  with_items:
+    - { re: '"busboy": ".*",', rep: '"busboy": "^0.3.1",' }
+    - { re: '"express": ".*"', rep: '"express": "^4.16.4"' }
+    - { re: '"request": ".*"', rep: '"request": "^2.88.0"' }
+    - { re: '"tmp", ".*"', rep: '"tmp": "^0.1.0"' }
+
 - name: Install up1 npm packages
   npm:
     path: "{{ up1_working_dir }}/server"
