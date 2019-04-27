@@ -56,7 +56,7 @@
     regexp: "{{ item.re }}"
     replace: "{{ item.rep }}"
   with_items:
-    - { re: '"busboy": ".*",', rep: '"busboy": "^0.3.1",' }
+    - { re: '"busboy": ".*",', rep: "\"busboy\": \"{{ up1_busboy_version | default('^0.3.1') }}\"," }
     - { re: '"express": ".*"', rep: '"express": "^4.16.4"' }
     - { re: '"request": ".*"', rep: '"request": "^2.88.0"' }
     - { re: '"tmp", ".*"', rep: '"tmp": "^0.1.0"' }

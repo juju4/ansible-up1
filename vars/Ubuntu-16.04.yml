@@ -7,6 +7,8 @@ up1_pkg_deps:
     - npm
     - cron
 
+up1_busboy_version: '^0.2.14'
+
 ssl_user: ssl-cert
 ssl_dir: /etc/ssl
 ssl_privatedir: /etc/ssl/private
