@@ -48,18 +48,18 @@ describe file("#{up1_working_dir}/client/config.js") do
   it { should be_owned_by "root" }
 end
 
-describe command("sudo -u www-up1 -H npm list") do
+describe command("cd #{up1_working_dir}/server && sudo -u www-up1 -H npm list") do
 #  let(:sudo_options) { '-u www-up1 -H' }
-  let(:pre_command) { "cd #{up1_working_dir}/server" }
+#  let(:pre_command) { "cd #{up1_working_dir}/server" }
   its(:stdout) { should match /busboy/ }
   its(:stdout) { should match /request/ }
   its(:stderr) { should match "" }
   its(:exit_status) { should eq 0 }
 end
 
-describe command("sudo -u www-up1 -H npm outdated") do
+describe command("cd #{up1_working_dir}/server && sudo -u www-up1 -H npm outdated") do
 #  let(:sudo_options) { '-u www-up1 -H' }
-  let(:pre_command) { "cd #{up1_working_dir}/server" }
+#  let(:pre_command) { "cd #{up1_working_dir}/server" }
   its(:stdout) { should match "" }
   its(:stderr) { should match "" }
   its(:exit_status) { should eq 0 }
