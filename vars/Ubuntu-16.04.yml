@@ -8,6 +8,7 @@ up1_pkg_deps:
     - cron
 
 up1_busboy_version: '^0.2.14'
+_up1_tmp_version: '^0.0.28'
 
 ssl_user: ssl-cert
 ssl_dir: /etc/ssl
