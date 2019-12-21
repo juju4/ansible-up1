@@ -64,6 +64,8 @@
 - name: Install up1 npm packages
   npm:
     path: "{{ up1_working_dir }}/server"
+  become: yes
+  become_user: "{{ up1_user }}"
 
 - include: supervisor.yml
   when: up1_supervisor_service
