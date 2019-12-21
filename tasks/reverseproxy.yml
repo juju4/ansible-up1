@@ -58,28 +58,34 @@
 # https://github.com/ansible/ansible/issues/16612
 - block:
     - debug: var=ansible_selinux
-    - name: RedHat | Ensure selinux dependencies are present
-      package:
-        name: libselinux-python
+    - name: RedHat7- | ensure selinux dependency is present
+      yum:
+        name:
+          - libselinux-python
+          - libsemanage-python
+          - policycoreutils-python
         state: present
       register: pkg_result
       until: pkg_result is success
+      when: ansible_distribution_major_version|int < 8
+
+    - name: RedHat8+ | Ensure selinux dependencies are present
+      package:
+        name:
+          - python3-libselinux
+          - python3-libsemanage
+          - python3-policycoreutils
+        state: present
+      register: pkg_result
+      until: pkg_result is success
+      when: ansible_distribution_major_version|int >= 8
+
     - name: recollect ansible facts
       action: setup
     - debug: var=ansible_selinux
   when: ansible_os_family == "RedHat"
-- block:
-    - name: RedHat | Ensure selinux dependencies are present
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - libselinux-python
-        - libsemanage-python
-        - policycoreutils-python
-      register: pkg_result
-      until: pkg_result is success
 
+- block:
     - name: RedHat | Allow proxy to network connect in selinux
       seboolean:
         name: httpd_can_network_connect
@@ -94,7 +100,10 @@
         setype: http_port_t
         state: present
       when: up1_serverlisten != 80 and up1_serverlisten != 443
-  when: ansible_os_family == "RedHat" and ansible_selinux.status is defined and ansible_selinux.status != 'disabled'
+  when: >
+    ansible_os_family == "RedHat" and
+    ansible_selinux.status is defined and
+    ansible_selinux.status != 'disabled'
 
 - name: Check apache configuration
   command: "{{ apache_check }} configtest"

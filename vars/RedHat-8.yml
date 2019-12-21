@@ -1,0 +1,28 @@
+---
+
+nodejs_path: /usr/bin/node
+
+up1_pkg_deps:
+    - nodejs
+    - npm
+    - crontabs
+    - http-parser
+
+ssl_user: root
+ssl_dir: /etc/pki/tls/certs
+ssl_privatedir: /etc/pki/tls/private
+apache_svc: httpd
+apache_confdir: /etc/httpd/conf.d
+apache_sitedir: /etc/httpd/conf.d
+apacheconf: /etc/httpd/conf/httpd.conf
+apache_check: httpd
+nginx_sitedir: /etc/nginx/conf.d
+
+up1_testing_pkg:
+    - iproute
+    - net-tools
+    - curl
+
+supervisor_confdir: /etc/supervisord.d
+supervisor_ext: ini
+supervisor_service: supervisord
