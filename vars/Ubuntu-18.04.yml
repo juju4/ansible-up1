@@ -7,7 +7,7 @@ up1_pkg_deps:
     - npm
     - cron
 
-_up1_tmp_version: '^0.1.0'
+_up1_tmp_version: '^0.2.1'
 
 ssl_user: ssl-cert
 ssl_dir: /etc/ssl

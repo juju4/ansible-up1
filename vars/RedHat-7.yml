@@ -2,7 +2,7 @@
 
 nodejs_path: /usr/bin/node
 
-_up1_tmp_version: '^0.1.0'
+_up1_tmp_version: '^0.2.1'
 
 up1_pkg_deps:
     - nodejs
