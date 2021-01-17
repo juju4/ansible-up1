@@ -1,5 +1,5 @@
-[![Build Status - Master](https://travis-ci.org/juju4/ansible-up1.svg?branch=master)](https://travis-ci.org/juju4/ansible-up1)
-[![Build Status - Devel](https://travis-ci.org/juju4/ansible-up1.svg?branch=devel)](https://travis-ci.org/juju4/ansible-up1/branches)
+[![Build Status - Master](https://travis-ci.com/juju4/ansible-up1.svg?branch=master)](https://travis-ci.com/juju4/ansible-up1)
+[![Build Status - Devel](https://travis-ci.com/juju4/ansible-up1.svg?branch=devel)](https://travis-ci.com/juju4/ansible-up1/branches)
 
 [![Actions Status - Master](https://github.com/juju4/ansible-up1/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible-up1/actions?query=branch%3Amaster)
 [![Actions Status - Devel](https://github.com/juju4/ansible-up1/workflows/AnsibleCI/badge.svg?branch=devel)](https://github.com/juju4/ansible-up1/actions?query=branch%3Adevel)
