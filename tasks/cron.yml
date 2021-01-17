@@ -8,7 +8,7 @@
     minute: "{{ up1_cron_expiry_schedule_min|string }}"
     hour: "{{ up1_cron_expiry_schedule_hour|string }}"
     user: "{{ up1_user }}"
-## files are encrypted so...
-#    job: "wipe -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
+    ## files are encrypted so...
+    # job: "wipe -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
     job: "rm -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
     cron_file: ansible_up1-clean

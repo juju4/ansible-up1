@@ -8,7 +8,7 @@
 
 - name: Check if existing up1 certificate file
   stat:
-    path: "{{ up1_https_cert_path }}"
+    path: "{{ up1_https_cert_path }}"
   register: localsslcert
 - debug: var=up1_https_cert_path
 - name: Generate SSL self-signed certificate

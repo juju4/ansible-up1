@@ -5,14 +5,14 @@ nodejs_path: /usr/bin/node
 _up1_tmp_version: '^0.2.1'
 
 up1_pkg_deps:
-    - nodejs
-    - npm
-    - crontabs
-# https://bugzilla.redhat.com/show_bug.cgi?id=1457763
-# https://bugzilla.redhat.com/show_bug.cgi?id=1473088
-#    - nodejs010-http-parser
-## 7.4 only?
-    - http-parser
+  - nodejs
+  - npm
+  - crontabs
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1457763
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1473088
+  # - nodejs010-http-parser
+  ## 7.4 only?
+  - http-parser
 
 ssl_user: root
 ssl_dir: /etc/pki/tls/certs
@@ -25,9 +25,9 @@ apache_check: httpd
 nginx_sitedir: /etc/nginx/conf.d
 
 up1_testing_pkg:
-    - iproute
-    - net-tools
-    - curl
+  - iproute
+  - net-tools
+  - curl
 
 supervisor_confdir: /etc/supervisord.d
 supervisor_ext: ini

@@ -55,6 +55,7 @@
     dest: "{{ up1_working_dir }}/server/package.json"
     regexp: "{{ item.re }}"
     replace: "{{ item.rep }}"
+    mode: '0644'
   with_items:
     - { re: '"busboy": ".*",', rep: "\"busboy\": \"{{ up1_busboy_version | default('^0.3.1') }}\"," }
     - { re: '"express": ".*"', rep: '"express": "^4.16.4"' }

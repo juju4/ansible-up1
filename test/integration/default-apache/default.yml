@@ -16,8 +16,8 @@
         ErrorLog "/var/log/apache2/up1_error_log"
     - up1_testing: true
   pre_tasks:
-# Can't set hostname in docker...
-# 'Could not set property: Failed to set static hostname: Device or resource busy'
+    # Can't set hostname in docker...
+    # 'Could not set property: Failed to set static hostname: Device or resource busy'
     - name: set hostname before certificate creation
       hostname:
         name: "{{ up1_servername }}"

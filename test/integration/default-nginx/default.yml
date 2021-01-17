@@ -14,7 +14,7 @@
         ssl_certificate_key /etc/ssl/private/{{ ansible_fqdn }}.key;
     - up1_testing: true
   pre_tasks:
-# Can't set hostname in docker...
+    # Can't set hostname in docker...
     - name: set hostname before certificate creation
       hostname:
         name: "{{ up1_servername }}"

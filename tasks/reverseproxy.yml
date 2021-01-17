@@ -26,6 +26,7 @@
   file:
     src: "{{ nginx_sitedir }}/up1.conf"
     dest: "/etc/nginx/sites-enabled/up1.conf"
+    mode: '0644'
     state: 'link'
   when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx' and ansible_os_family == 'Debian'
   notify:
@@ -33,7 +34,7 @@
   register: nginxcfg
 
 - name: Check nginx configuration
-  command: "nginx -t"
+  command: "nginx -t"  # noqa 503
   changed_when: false
   when: nginxcfg.changed
 
@@ -49,6 +50,7 @@
   file:
     src: "{{ apache_sitedir }}/up1.conf"
     dest: "/etc/apache2/sites-enabled/up1.conf"
+    mode: '0644'
     state: 'link'
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
   notify:
@@ -92,7 +94,7 @@
         state: yes
         persistent: yes
 
-# https://wiki.centos.org/HowTos/SELinux#head-ad837f60830442ae77a81aedd10c20305a811388
+    # https://wiki.centos.org/HowTos/SELinux#head-ad837f60830442ae77a81aedd10c20305a811388
     - name: RedHat | Allow httpd to listen to unusual ports
       seport:
         ports: "{{ up1_serverlisten }}"
@@ -106,6 +108,6 @@
     ansible_selinux.status != 'disabled'
 
 - name: Check apache configuration
-  command: "{{ apache_check }} configtest"
+  command: "{{ apache_check }} configtest"  # noqa 503
   changed_when: false
   when: apachecfg.changed
