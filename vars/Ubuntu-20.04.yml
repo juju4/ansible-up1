@@ -1,0 +1,30 @@
+---
+
+nodejs_path: /usr/bin/nodejs
+
+up1_pkg_deps:
+  - nodejs
+  - npm
+  - cron
+
+_up1_tmp_version: '^0.2.1'
+
+ssl_user: ssl-cert
+ssl_dir: /etc/ssl
+ssl_privatedir: /etc/ssl/private
+nginx_sitedir: /etc/nginx/sites-available
+apache_svc: apache2
+apacheetc: /etc/apache2
+apache_confdir: /etc/apache2/conf-available
+apache_sitedir: /etc/apache2/sites-available
+apacheconf: /etc/apache2/sites-available/000-default.conf
+apache_check: apache2ctl
+
+up1_testing_pkg:
+  - iproute2
+  - net-tools
+  - curl
+
+supervisor_confdir: /etc/supervisor/conf.d
+supervisor_ext: conf
+supervisor_service: supervisor
