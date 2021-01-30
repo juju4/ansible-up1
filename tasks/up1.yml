@@ -1,7 +1,10 @@
 ---
 
 - name: ensure up1 dependencies are present
-  package: name={{ up1_pkg_deps }} state=present
+  package:
+    name: "{{ up1_pkg_deps }}"
+    state: present
+    update_cache: yes
   register: pkg_result
   until: pkg_result is success
 
