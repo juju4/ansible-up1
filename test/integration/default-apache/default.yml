@@ -27,7 +27,8 @@
         dest: /etc/hosts
         line: '127.0.0.1 up1.example.com'
       when: not (ansible_virtualization_type is defined and (ansible_virtualization_type == "docker"))
-    - set_fact:
+    - name: RedHat | set fact
+      set_fact:
         up1_reverseproxy_https_conf: |
             SSLEngine on
             Include /etc/httpd/harden-apache2-https.conf
