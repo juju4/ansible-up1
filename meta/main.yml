@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: up1
   author: juju4
   description: Up1, Client-side Encrypted Image Host
   license: BSD
