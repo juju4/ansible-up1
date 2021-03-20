@@ -10,7 +10,8 @@
   stat:
     path: "{{ up1_https_cert_path }}"
   register: localsslcert
-- debug: var=up1_https_cert_path
+- name: Debug | up1_https_cert_path
+  debug: var=up1_https_cert_path
 - name: Generate SSL self-signed certificate
   command: >
     openssl req -x509 -nodes -sha256 -days {{ up1_certduration }} -newkey rsa:2048

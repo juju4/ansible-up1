@@ -1,6 +1,7 @@
 ---
 
-- debug: var=ansible_service_mgr
+- name: Debug | ansible_service_mgr
+  debug: var=ansible_service_mgr
 - block:
     - name: install systemd configuration
       template:
