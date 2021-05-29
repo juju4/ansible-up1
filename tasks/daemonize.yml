@@ -16,7 +16,6 @@
         daemon_reload: yes
         name: up1
       when: systemd.changed
-      ignore_errors: true
   # when: ansible_service_mgr == 'systemd'
   when: >
     ansible_distribution_release == 'xenial' or
@@ -38,4 +37,3 @@
     name: up1
     enabled: yes
     state: 'started'
-  ignore_errors: true
