@@ -82,7 +82,7 @@ jobs:
       - name: After script - systemd
         run: |
           systemctl -l --no-pager status supervisor || true
-          systemd-analyze security || true
+          systemd-analyze --no-pager security || true
           rsyslogd -v
         continue-on-error: true
       - name: After script - network
