@@ -23,21 +23,21 @@
   become_user: "{{ up1_user }}"
 
 - block:
-    - include: "random.yml name=api"
+    - import_tasks: "random.yml name=api"
     - name: Set fact api key
       set_fact:
         up1_api_key: "{{ salt }}"
       no_log: true
   when: up1_api_key is not defined or not up1_api_key
 - block:
-    - include: "random.yml name=delete"
+    - import_tasks: "random.yml name=delete"
     - name: Set fact delete key
       set_fact:
         up1_delete_key: "{{ salt }}"
       no_log: true
   when: up1_delete_key is not defined or not up1_delete_key
 
-- include: certificate-selfsigned.yml
+- import_tasks: certificate-selfsigned.yml
   when: up1_https_enable and up1_https_selfsigned
 
 - name: install server configuration
@@ -72,11 +72,11 @@
   become: yes
   become_user: "{{ up1_user }}"
 
-- include: supervisor.yml
+- import_tasks: supervisor.yml
   when: up1_supervisor_service
-- include: daemonize.yml
+- import_tasks: daemonize.yml
   when: not up1_supervisor_service
 
-- include: cron.yml
+- import_tasks: cron.yml
 
-- include: reverseproxy.yml
+- import_tasks: reverseproxy.yml
