@@ -23,14 +23,18 @@
   become_user: "{{ up1_user }}"
 
 - block:
-    - import_tasks: "random.yml name=api"
+    - import_tasks: random.yml
+      vars:
+        name: api
     - name: Set fact api key
       set_fact:
         up1_api_key: "{{ salt }}"
       no_log: true
   when: up1_api_key is not defined or not up1_api_key
 - block:
-    - import_tasks: "random.yml name=delete"
+    - import_tasks: random.yml
+      vars:
+        name: delete
     - name: Set fact delete key
       set_fact:
         up1_delete_key: "{{ salt }}"
