@@ -1,7 +1,7 @@
 ---
 
 - name: Ensure testing tools are present
-  package:
+  ansible.builtin.package:
     name: "{{ up1_testing_pkg }}"
     state: present
   register: pkg_result

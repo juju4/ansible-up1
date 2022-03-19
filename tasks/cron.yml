@@ -1,7 +1,7 @@
 ---
 
 - name: up1 cron - clean files
-  cron:
+  ansible.builtin.cron:
     name: up1 cron clean files
     weekday: "{{ up1_cron_expiry_schedule_weekday }}"
     day: "{{ up1_cron_expiry_schedule_day }}"

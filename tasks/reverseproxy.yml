@@ -13,7 +13,7 @@
     - restart apache
 
 - name: install up1 nginx reverseproxy configuration
-  template:
+  ansible.builtin.template:
     src: up1-nginx.conf.j2
     dest: "{{ nginx_sitedir }}/up1.conf"
     mode: '0644'
@@ -23,7 +23,7 @@
     - restart nginx
 
 - name: Debian | enable nginx reverseproxy
-  file:
+  ansible.builtin.file:
     src: "{{ nginx_sitedir }}/up1.conf"
     dest: "/etc/nginx/sites-enabled/up1.conf"
     mode: '0644'
@@ -34,12 +34,12 @@
   register: nginxcfg
 
 - name: Check nginx configuration
-  command: "nginx -t"  # noqa 503
+  ansible.builtin.command: "nginx -t"  # noqa 503
   changed_when: false
   when: nginxcfg.changed
 
 - name: install up1 apache reverseproxy configuration
-  template:
+  ansible.builtin.template:
     src: up1-apache.conf.j2
     dest: "{{ apache_sitedir }}/up1.conf"
     mode: '0644'
@@ -47,7 +47,7 @@
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache'
 
 - name: Debian | enable up1 apache reverseproxy configuration
-  file:
+  ansible.builtin.file:
     src: "{{ apache_sitedir }}/up1.conf"
     dest: "/etc/apache2/sites-enabled/up1.conf"
     mode: '0644'
@@ -60,9 +60,9 @@
 # https://github.com/ansible/ansible/issues/16612
 - block:
     - name: Debug | ansible_selinux
-      debug: var=ansible_selinux
+      ansible.builtin.debug: var=ansible_selinux
     - name: RedHat7- | ensure selinux dependency is present
-      yum:
+      ansible.builtin.yum:
         name:
           - libselinux-python
           - libsemanage-python
@@ -73,7 +73,7 @@
       when: ansible_distribution_major_version|int < 8
 
     - name: RedHat8+ | Ensure selinux dependencies are present
-      package:
+      ansible.builtin.package:
         name:
           - python3-libselinux
           - python3-libsemanage
@@ -84,9 +84,9 @@
       when: ansible_distribution_major_version|int >= 8
 
     - name: recollect ansible facts
-      action: setup
+      ansible.builtin.setup:
     - name: Debug | ansible_selinux
-      debug: var=ansible_selinux
+      ansible.builtin.debug: var=ansible_selinux
   when: ansible_os_family == "RedHat"
 
 - block:
@@ -110,6 +110,6 @@
     ansible_selinux.status != 'disabled'
 
 - name: Check apache configuration
-  command: "{{ apache_check }} configtest"  # noqa 503
+  ansible.builtin.command: "{{ apache_check }} configtest"  # noqa 503
   changed_when: false
   when: apachecfg.changed

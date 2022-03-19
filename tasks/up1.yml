@@ -1,7 +1,7 @@
 ---
 
 - name: ensure up1 dependencies are present
-  package:
+  ansible.builtin.package:
     name: "{{ up1_pkg_deps }}"
     state: present
     update_cache: yes
@@ -9,12 +9,12 @@
   until: pkg_result is success
 
 - name: ensure up1 user exists
-  user:
+  ansible.builtin.user:
     name: "{{ up1_user }}"
     home: "{{ up1_home }}"
 
 - name: git clone up1 repository
-  git:
+  ansible.builtin.git:
     repo: https://github.com/Upload/Up1
     dest: "{{ up1_working_dir }}"
     version: "{{ up1_version | default('9fc501783bb0510b67a99d36a3cdc852cef47f5d') }}"
@@ -27,7 +27,7 @@
       vars:
         name: api
     - name: Set fact api key
-      set_fact:
+      ansible.builtin.set_fact:
         up1_api_key: "{{ salt }}"
       no_log: true
   when: up1_api_key is not defined or not up1_api_key
@@ -36,7 +36,7 @@
       vars:
         name: delete
     - name: Set fact delete key
-      set_fact:
+      ansible.builtin.set_fact:
         up1_delete_key: "{{ salt }}"
       no_log: true
   when: up1_delete_key is not defined or not up1_delete_key
@@ -45,21 +45,21 @@
   when: up1_https_enable and up1_https_selfsigned
 
 - name: install server configuration
-  template:
+  ansible.builtin.template:
     src: server.conf.j2
     dest: "{{ up1_working_dir }}/server/server.conf"
     mode: '0644'
     backup: yes
 
 - name: install client configuration
-  template:
+  ansible.builtin.template:
     src: client-config.js.j2
     dest: "{{ up1_working_dir }}/client/config.js"
     mode: '0644'
     backup: yes
 
 - name: update up1 npm dependencies to fix deprecated one
-  replace:
+  ansible.builtin.replace:
     dest: "{{ up1_working_dir }}/server/package.json"
     regexp: "{{ item.re }}"
     replace: "{{ item.rep }}"

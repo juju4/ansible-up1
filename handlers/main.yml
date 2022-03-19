@@ -1,13 +1,13 @@
 ---
 
 - name: restart apache
-  service: name={{ apache_svc }} state=restarted
+  ansible.builtin.service: name={{ apache_svc }} state=restarted
 
 - name: restart nginx
-  service: name=nginx state=restarted
+  ansible.builtin.service: name=nginx state=restarted
 
 - name: restart up1
-  service: name=up1 state=restarted
+  ansible.builtin.service: name=up1 state=restarted
 
 - name: supervisor update
-  service: name={{ supervisor_service }} state=restarted sleep=15
+  ansible.builtin.service: name={{ supervisor_service }} state=restarted sleep=15

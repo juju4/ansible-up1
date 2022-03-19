@@ -1,14 +1,14 @@
 ---
 
 - name: Ensure supervisor is present
-  package:
+  ansible.builtin.package:
     name: supervisor
     state: present
   register: pkg_result
   until: pkg_result is success
 
 - name: set up1 supervisor config
-  template:
+  ansible.builtin.template:
     src: supervisor-up1.conf.j2
     dest: "{{ supervisor_confdir }}/up1.{{ supervisor_ext }}"
     mode: '0644'
@@ -16,4 +16,4 @@
     - supervisor update
 
 - name: ensure supervisor service is enabled
-  service: name={{ supervisor_service }} enabled=yes
+  ansible.builtin.service: name={{ supervisor_service }} enabled=yes
