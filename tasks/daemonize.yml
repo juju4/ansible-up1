@@ -2,7 +2,8 @@
 
 - name: Debug | ansible_service_mgr
   ansible.builtin.debug: var=ansible_service_mgr
-- block:
+- name: Ubuntu Xenial or RedHat7
+  block:
     - name: install systemd configuration
       ansible.builtin.template:
         src: systemd-up1.service.j2
@@ -20,7 +21,8 @@
   when: >
     ansible_distribution_release == 'xenial' or
     (ansible_os_family == "RedHat" and ansible_distribution_major_version == '7')
-- block:
+- name: Ubuntu Trusty
+  block:
     - name: Copy upstart service config
       ansible.builtin.template:
         src: upstart-up1.conf.j2

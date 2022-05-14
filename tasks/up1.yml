@@ -22,7 +22,8 @@
   become: yes
   become_user: "{{ up1_user }}"
 
-- block:
+- name: random api key
+  block:
     - import_tasks: random.yml
       vars:
         name: api
@@ -31,7 +32,8 @@
         up1_api_key: "{{ salt }}"
       no_log: true
   when: up1_api_key is not defined or not up1_api_key
-- block:
+- name: random delete key
+  block:
     - import_tasks: random.yml
       vars:
         name: delete
