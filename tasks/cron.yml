@@ -5,8 +5,8 @@
     name: up1 cron clean files
     weekday: "{{ up1_cron_expiry_schedule_weekday }}"
     day: "{{ up1_cron_expiry_schedule_day }}"
-    minute: "{{ up1_cron_expiry_schedule_min|string }}"
-    hour: "{{ up1_cron_expiry_schedule_hour|string }}"
+    minute: "{{ up1_cron_expiry_schedule_min | string }}"
+    hour: "{{ up1_cron_expiry_schedule_hour | string }}"
     user: "{{ up1_user }}"
     ## files are encrypted so...
     # job: "wipe -f {{ up1_working_dir }}/i/* 2>&1 > /tmp/cron-up1-clean"
