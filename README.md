@@ -68,8 +68,6 @@ Node server in itself has no default log.
 https://github.com/Upload/Up1/issues/19
 An optional cron has been added as a workaround
 
-* Currently, no upstart config for Trusty
-
 * Reverseproxy configuration: only nginx tested. Apache config for reference.
 
 ## License

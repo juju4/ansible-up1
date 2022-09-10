@@ -1,5 +1,9 @@
 ---
 
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
 - name: restart apache
   ansible.builtin.service: name={{ apache_svc }} state=restarted
 
