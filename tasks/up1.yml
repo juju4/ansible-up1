@@ -1,6 +1,6 @@
 ---
 
-- name: ensure up1 dependencies are present
+- name: Ensure up1 dependencies are present
   ansible.builtin.package:
     name: "{{ up1_pkg_deps }}"
     state: present
@@ -8,12 +8,12 @@
   register: pkg_result
   until: pkg_result is success
 
-- name: ensure up1 user exists
+- name: Ensure up1 user exists
   ansible.builtin.user:
     name: "{{ up1_user }}"
     home: "{{ up1_home }}"
 
-- name: git clone up1 repository
+- name: Git clone up1 repository
   ansible.builtin.git:
     repo: https://github.com/Upload/Up1
     dest: "{{ up1_working_dir }}"
@@ -22,7 +22,7 @@
   become: yes
   become_user: "{{ up1_user }}"
 
-- name: random api key
+- name: Random api key
   block:
     - import_tasks: random.yml
       vars:
@@ -32,7 +32,7 @@
         up1_api_key: "{{ salt }}"
       no_log: true
   when: up1_api_key is not defined or not up1_api_key
-- name: random delete key
+- name: Random delete key
   block:
     - import_tasks: random.yml
       vars:
@@ -46,21 +46,21 @@
 - import_tasks: certificate-selfsigned.yml
   when: up1_https_enable and up1_https_selfsigned
 
-- name: install server configuration
+- name: Install server configuration
   ansible.builtin.template:
     src: server.conf.j2
     dest: "{{ up1_working_dir }}/server/server.conf"
     mode: '0644'
     backup: yes
 
-- name: install client configuration
+- name: Install client configuration
   ansible.builtin.template:
     src: client-config.js.j2
     dest: "{{ up1_working_dir }}/client/config.js"
     mode: '0644'
     backup: yes
 
-- name: update up1 npm dependencies to fix deprecated one
+- name: Update up1 npm dependencies to fix deprecated one
   ansible.builtin.replace:
     dest: "{{ up1_working_dir }}/server/package.json"
     regexp: "{{ item.re }}"

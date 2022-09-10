@@ -15,7 +15,7 @@
     - Reload systemd
     - Restart up1
 
-- name: enable and start up1 systemd service
+- name: Enable and start up1 systemd service
   ansible.builtin.service:
     name: up1
     enabled: yes

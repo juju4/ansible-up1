@@ -10,9 +10,9 @@
     - proxy_http
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
   notify:
-    - restart apache
+    - Restart apache
 
-- name: install up1 nginx reverseproxy configuration
+- name: Install up1 nginx reverseproxy configuration
   ansible.builtin.template:
     src: up1-nginx.conf.j2
     dest: "{{ nginx_sitedir }}/up1.conf"
@@ -20,7 +20,7 @@
     backup: yes
   when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx'
   notify:
-    - restart nginx
+    - Restart nginx
 
 - name: Debian | enable nginx reverseproxy
   ansible.builtin.file:
@@ -30,7 +30,7 @@
     state: 'link'
   when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx' and ansible_os_family == 'Debian'
   notify:
-    - restart nginx
+    - Restart nginx
   register: nginxcfg
 
 - name: Check nginx configuration
@@ -38,7 +38,7 @@
   changed_when: false
   when: nginxcfg.changed
 
-- name: install up1 apache reverseproxy configuration
+- name: Install up1 apache reverseproxy configuration
   ansible.builtin.template:
     src: up1-apache.conf.j2
     dest: "{{ apache_sitedir }}/up1.conf"
@@ -54,7 +54,7 @@
     state: 'link'
   when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
   notify:
-    - restart apache
+    - Restart apache
   register: apachecfg
 
 # https://github.com/ansible/ansible/issues/16612
@@ -71,7 +71,7 @@
         state: present
       register: pkg_result
       until: pkg_result is success
-      when: ansible_distribution_major_version|int < 8
+      when: ansible_distribution_major_version | int < 8
 
     - name: RedHat8+ | Ensure selinux dependencies are present
       ansible.builtin.package:
@@ -82,9 +82,9 @@
         state: present
       register: pkg_result
       until: pkg_result is success
-      when: ansible_distribution_major_version|int >= 8
+      when: ansible_distribution_major_version | int >= 8
 
-    - name: recollect ansible facts
+    - name: Recollect ansible facts
       ansible.builtin.setup:
     - name: Debug | ansible_selinux
       ansible.builtin.debug: var=ansible_selinux

@@ -7,13 +7,13 @@
   register: pkg_result
   until: pkg_result is success
 
-- name: set up1 supervisor config
+- name: Set up1 supervisor config
   ansible.builtin.template:
     src: supervisor-up1.conf.j2
     dest: "{{ supervisor_confdir }}/up1.{{ supervisor_ext }}"
     mode: '0644'
   notify:
-    - supervisor update
+    - Supervisor update
 
-- name: ensure supervisor service is enabled
+- name: Ensure supervisor service is enabled
   ansible.builtin.service: name={{ supervisor_service }} enabled=yes

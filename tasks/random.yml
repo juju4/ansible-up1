@@ -4,7 +4,7 @@
   ansible.builtin.set_fact:
     secretdir: "{{ up1_home }}"
 
-- name: ensure openssl is present
+- name: Ensure openssl is present
   ansible.builtin.package: name=openssl state=present
   register: pkg_result
   until: pkg_result is success
