@@ -1,7 +1,11 @@
 ---
 
 - name: Debian | self-signed certificate packages dependencies
-  ansible.builtin.apt: name=ssl-cert state=present update_cache=yes cache_valid_time=3600
+  ansible.builtin.apt:
+    name: ssl-cert
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
   when: ansible_os_family == 'Debian'
   register: pkg_result
   until: pkg_result is success
@@ -11,12 +15,17 @@
     path: "{{ up1_https_cert_path }}"
   register: localsslcert
 - name: Debug | up1_https_cert_path
-  ansible.builtin.debug: var=up1_https_cert_path
-- name: Generate SSL self-signed certificate
+  ansible.builtin.debug:
+    var: up1_https_cert_path
+- name: Generate SSL self-signed certificate  # noqa no-free-form
   ansible.builtin.command: >
     openssl req -x509 -nodes -sha256 -days {{ up1_certduration }} -newkey rsa:2048
         -subj \"{{ up1_certinfo }}/CN={{ up1_certificate_cn }}\"
         -keyout {{ up1_https_key_path }} -out {{ up1_https_cert_path }}
   when: not localsslcert.stat.exists
 - name: Ensure up1 certificate permissions are correct
-  ansible.builtin.file: "path={{ up1_https_key_path }} owner={{ up1_user }} group={{ ssl_user }} mode=0440"
+  ansible.builtin.file:
+    path: "{{ up1_https_key_path }}"
+    owner: "{{ up1_user }}"
+    group: "{{ ssl_user }}"
+    mode: "0440"

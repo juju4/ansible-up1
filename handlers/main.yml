@@ -5,13 +5,22 @@
     daemon_reload: yes
 
 - name: Restart apache
-  ansible.builtin.service: name={{ apache_svc }} state=restarted
+  ansible.builtin.service:
+    name: "{{ apache_svc }}"
+    state: "restarted"
 
 - name: Restart nginx
-  ansible.builtin.service: name=nginx state=restarted
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
 
 - name: Restart up1
-  ansible.builtin.service: name=up1 state=restarted
+  ansible.builtin.service:
+    name: up1
+    state: restarted
 
 - name: Supervisor update
-  ansible.builtin.service: name={{ supervisor_service }} state=restarted sleep=15
+  ansible.builtin.service:
+    name: "{{ supervisor_service }}"
+    state: "restarted"
+    sleep: "15"

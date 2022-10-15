@@ -16,4 +16,6 @@
     - Supervisor update
 
 - name: Ensure supervisor service is enabled
-  ansible.builtin.service: name={{ supervisor_service }} enabled=yes
+  ansible.builtin.service:
+    name: "{{ supervisor_service }}"
+    enabled: "yes"

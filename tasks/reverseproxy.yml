@@ -1,7 +1,7 @@
 ---
 
 - name: Debian | Ensure required apache modules are loaded
-  apache2_module:
+  community.general.apache2_module:
     state: present
     name: "{{ item }}"
   with_items:
@@ -59,9 +59,11 @@
 
 # https://github.com/ansible/ansible/issues/16612
 - name: RedHat selinux facts
+  when: ansible_os_family == "RedHat"
   block:
     - name: Debug | ansible_selinux
-      ansible.builtin.debug: var=ansible_selinux
+      ansible.builtin.debug:
+        var: ansible_selinux
     - name: RedHat7- | ensure selinux dependency is present
       ansible.builtin.yum:
         name:
@@ -87,29 +89,29 @@
     - name: Recollect ansible facts
       ansible.builtin.setup:
     - name: Debug | ansible_selinux
-      ansible.builtin.debug: var=ansible_selinux
-  when: ansible_os_family == "RedHat"
+      ansible.builtin.debug:
+        var: ansible_selinux
 
 - name: RedHat selinux
+  when: >
+    ansible_os_family == "RedHat" and
+    ansible_selinux.status is defined and
+    ansible_selinux.status != 'disabled'
   block:
     - name: RedHat | Allow proxy to network connect in selinux
-      seboolean:
+      ansible.posix.seboolean:
         name: httpd_can_network_connect
         state: yes
         persistent: yes
 
     # https://wiki.centos.org/HowTos/SELinux#head-ad837f60830442ae77a81aedd10c20305a811388
     - name: RedHat | Allow httpd to listen to unusual ports
-      seport:
+      community.general.seport:
         ports: "{{ up1_serverlisten }}"
         proto: tcp
         setype: http_port_t
         state: present
       when: up1_serverlisten != 80 and up1_serverlisten != 443
-  when: >
-    ansible_os_family == "RedHat" and
-    ansible_selinux.status is defined and
-    ansible_selinux.status != 'disabled'
 
 - name: Check apache configuration
   ansible.builtin.command: "{{ apache_check }} configtest"  # noqa 503

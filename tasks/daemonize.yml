@@ -1,7 +1,8 @@
 ---
 
 - name: Debug | ansible_service_mgr
-  ansible.builtin.debug: var=ansible_service_mgr
+  ansible.builtin.debug:
+    var: ansible_service_mgr
 
 - name: Install systemd configuration
   ansible.builtin.template:

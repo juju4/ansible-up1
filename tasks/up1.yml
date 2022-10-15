@@ -23,27 +23,30 @@
   become_user: "{{ up1_user }}"
 
 - name: Random api key
+  when: up1_api_key is not defined or not up1_api_key
   block:
-    - import_tasks: random.yml
+    - name: Import random
+      ansible.builtin.import_tasks: random.yml
       vars:
         name: api
     - name: Set fact api key
       ansible.builtin.set_fact:
         up1_api_key: "{{ salt }}"
       no_log: true
-  when: up1_api_key is not defined or not up1_api_key
 - name: Random delete key
+  when: up1_delete_key is not defined or not up1_delete_key
   block:
-    - import_tasks: random.yml
+    - name: Import random
+      ansible.builtin.import_tasks: random.yml
       vars:
         name: delete
     - name: Set fact delete key
       ansible.builtin.set_fact:
         up1_delete_key: "{{ salt }}"
       no_log: true
-  when: up1_delete_key is not defined or not up1_delete_key
 
-- import_tasks: certificate-selfsigned.yml
+- name: Import certificate-selfsigned
+  ansible.builtin.import_tasks: certificate-selfsigned.yml
   when: up1_https_enable and up1_https_selfsigned
 
 - name: Install server configuration
@@ -73,16 +76,20 @@
     - { re: '"tmp": ".*"', rep: '"tmp": "{{ up1_tmp_version | default(_up1_tmp_version) }}"' }
 
 - name: Install up1 npm packages
-  npm:
+  community.general.npm:
     path: "{{ up1_working_dir }}/server"
   become: yes
   become_user: "{{ up1_user }}"
 
-- import_tasks: supervisor.yml
+- name: Import supervisor
+  ansible.builtin.import_tasks: supervisor.yml
   when: up1_supervisor_service
-- import_tasks: daemonize.yml
+- name: Import daemonize
+  ansible.builtin.import_tasks: daemonize.yml
   when: not up1_supervisor_service
 
-- import_tasks: cron.yml
+- name: Import cron
+  ansible.builtin.import_tasks: cron.yml
 
-- import_tasks: reverseproxy.yml
+- name: Import reverseproxy
+  ansible.builtin.import_tasks: reverseproxy.yml

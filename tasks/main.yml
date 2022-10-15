@@ -10,7 +10,9 @@
 #   include_vars: "Alpine.yml"
 #   when: ansible_os_family == "Alpine"
 
-- import_tasks: up1.yml
+- name: Import up1
+  ansible.builtin.import_tasks: up1.yml
 
-- import_tasks: testing.yml
+- name: Import testing
+  ansible.builtin.import_tasks: testing.yml
   when: up1_testing
