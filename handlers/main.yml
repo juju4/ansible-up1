@@ -23,4 +23,3 @@
   ansible.builtin.service:
     name: "{{ supervisor_service }}"
     state: "restarted"
-    sleep: "15"
