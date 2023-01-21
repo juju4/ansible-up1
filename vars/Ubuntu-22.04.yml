@@ -3,6 +3,7 @@
 nodejs_path: /usr/bin/nodejs
 
 up1_pkg_deps:
+  - git
   - nodejs
   - npm
   - cron
