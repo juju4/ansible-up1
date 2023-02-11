@@ -11,7 +11,7 @@ up1_pkg_deps:
 _up1_tmp_version: '^0.2.1'
 
 ssl_user: ssl-cert
-ssl_dir: /etc/ssl
+ssl_dir: /etc/ssl/certs
 ssl_privatedir: /etc/ssl/private
 nginx_sitedir: /etc/nginx/sites-available
 apache_svc: apache2

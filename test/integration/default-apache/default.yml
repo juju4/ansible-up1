@@ -10,7 +10,7 @@
     - up1_reverseproxy_https_conf: |
         SSLEngine on
         Include /etc/apache2/harden-apache2-https.conf
-        SSLCertificateFile /etc/ssl/{{ ansible_fqdn }}.crt
+        SSLCertificateFile /etc/ssl/certs/{{ ansible_fqdn }}.crt
         SSLCertificateKeyFile /etc/ssl/private/{{ ansible_fqdn }}.key
         CustomLog "/var/log/apache2/up1_access_log" combined
         ErrorLog "/var/log/apache2/up1_error_log"

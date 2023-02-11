@@ -10,7 +10,7 @@
     - up1_reverseproxy_https_conf: |
         include /etc/nginx/harden-nginx-https;
         include /etc/nginx/harden-nginx-common;
-        ssl_certificate /etc/ssl/{{ ansible_fqdn }}.crt;
+        SSLCertificateFile /etc/ssl/certs/{{ ansible_fqdn }}.crt
         ssl_certificate_key /etc/ssl/private/{{ ansible_fqdn }}.key;
     - up1_testing: true
   pre_tasks:
