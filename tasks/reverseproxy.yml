@@ -34,7 +34,8 @@
   register: nginxcfg
 
 - name: Check nginx configuration
-  ansible.builtin.command: "nginx -t"  # noqa 503
+  ansible.builtin.command:
+    cmd: "nginx -t"  # noqa no-handler
   changed_when: false
   when: nginxcfg.changed
 
@@ -114,6 +115,7 @@
       when: up1_serverlisten != 80 and up1_serverlisten != 443
 
 - name: Check apache configuration
-  ansible.builtin.command: "{{ apache_check }} configtest"  # noqa 503
+  ansible.builtin.command:
+    cmd: "{{ apache_check }} configtest"  # noqa no-handler
   changed_when: false
   when: apachecfg.changed

@@ -1,7 +1,8 @@
 ---
 
-- hosts: all
+- name: Test integration playbook
+  hosts: all
   vars:
-    - up1_testing: true
+    up1_testing: true
   roles:
     - juju4.up1
