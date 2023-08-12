@@ -28,7 +28,7 @@
     - name: Import random
       ansible.builtin.import_tasks: random.yml
       vars:
-        name: api
+        random_name: api
     - name: Set fact api key
       ansible.builtin.set_fact:
         up1_api_key: "{{ salt }}"
@@ -39,7 +39,7 @@
     - name: Import random
       ansible.builtin.import_tasks: random.yml
       vars:
-        name: delete
+        random_name: delete
     - name: Set fact delete key
       ansible.builtin.set_fact:
         up1_delete_key: "{{ salt }}"
