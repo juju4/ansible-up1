@@ -10,12 +10,11 @@ https://github.com/Upload/Up1
 
 ### Ansible
 It was tested on the following versions:
- * 2.2
- * 2.5
+ * 2.7-10
 
 ### Operating systems
 
-Ubuntu 14.04, 16.04, 18.04 and Centos7
+Ubuntu 20.04, 22.04, 24.04.
 
 ## Example Playbook
 
@@ -69,6 +68,13 @@ https://github.com/Upload/Up1/issues/19
 An optional cron has been added as a workaround
 
 * Reverseproxy configuration: only nginx tested. Apache config for reference.
+
+## Alternative options
+
+* https://github.com/freedomofpress/securedrop/
+* https://github.com/timvisee/send
+* https://github.com/ldidry/lufi
+* https://bitwarden.com/blog/bitwarden-send-how-it-works/
 
 ## License
 
