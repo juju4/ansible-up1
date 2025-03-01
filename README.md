@@ -1,10 +1,15 @@
-[![Actions Status - Master](https://github.com/juju4/ansible-up1/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible-up1/actions?query=branch%3Amaster)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+# Soon to be archived
+
+[![Actions Status - Main](https://github.com/juju4/ansible-up1/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible-up1/actions?query=branch%3Amain)
 [![Actions Status - Devel](https://github.com/juju4/ansible-up1/workflows/AnsibleCI/badge.svg?branch=devel)](https://github.com/juju4/ansible-up1/actions?query=branch%3Adevel)
 
 # Up1, Client-side Encrypted Image Host ansible role
 
 Ansible role to setup Up1, Client-side Encrypted Image Host
 https://github.com/Upload/Up1
+
+There has been no release and very few commits in upstream since 2016-2017. It can be considered unmaintained. See below for alternatives.
 
 ## Requirements & Dependencies
 
