@@ -80,6 +80,12 @@ An optional cron has been added as a workaround
 * https://github.com/timvisee/send
 * https://github.com/ldidry/lufi
 * https://bitwarden.com/blog/bitwarden-send-how-it-works/
+* [PairDrop: Transfer Files Cross-Platform. No Setup, No Signup. ](https://github.com/schlagmichdoch/PairDrop)
+* [The simple but elegant self-hosted file transfer & sharing solution ](https://github.com/YouTransfer/YouTransfer)
+* [Sharry is a self-hosted file sharing web application. ](https://github.com/eikek/sharry)
+* [A file manager / web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze, ... ](https://github.com/mickael-kerjean/filestash)
+* [Magic-Wormhole: Get Things From One Computer To Another, Safely](https://magic-wormhole.readthedocs.io/en/latest/) - cli
+* [A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability. ](https://github.com/FiloSottile/age) - cli
 
 ## License
 
