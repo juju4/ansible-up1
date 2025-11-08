@@ -2,7 +2,9 @@
 
 up1_user: www-up1
 up1_home: '/var/www-up1'
-up1_version: 15f9c11155836c156d85ddf150f3a3147fb9674d
+# FIXME! latest release Feb 2016, last commit Jul 2024
+# renovate: datasource=github-releases depName=Upload/Up1
+up1_version: '15f9c11155836c156d85ddf150f3a3147fb9674d'
 
 up1_working_dir: "{{ up1_home }}/src"
 
