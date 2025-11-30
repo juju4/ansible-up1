@@ -86,6 +86,8 @@ An optional cron has been added as a workaround
 * [A file manager / web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze, ... ](https://github.com/mickael-kerjean/filestash)
 * [Magic-Wormhole: Get Things From One Computer To Another, Safely](https://magic-wormhole.readthedocs.io/en/latest/) - cli
 * [A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability. ](https://github.com/FiloSottile/age) - cli
+* [Self-hosted pastebin powered by Git, open-source alternative to Github Gist. ](https://github.com/thomiceli/opengist)
+* [WebDAV Isn't Dead Yet, Sep 2025](https://blog.feld.me/posts/2025/09/webdav-isnt-dead-yet/)
 
 ## License
 
