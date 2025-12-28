@@ -8,7 +8,7 @@
     - headers
     - proxy
     - proxy_http
-  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_facts['os_family'] == 'Debian'
   notify:
     - Restart apache
 
@@ -28,7 +28,7 @@
     dest: "/etc/nginx/sites-enabled/up1.conf"
     mode: '0644'
     state: 'link'
-  when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx' and ansible_os_family == 'Debian'
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'nginx' and ansible_facts['os_family'] == 'Debian'
   notify:
     - Restart nginx
   register: nginxcfg
@@ -53,14 +53,14 @@
     dest: "/etc/apache2/sites-enabled/up1.conf"
     mode: '0644'
     state: 'link'
-  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_os_family == 'Debian'
+  when: up1_reverseproxy is defined and up1_reverseproxy == 'apache' and ansible_facts['os_family'] == 'Debian'
   notify:
     - Restart apache
   register: apachecfg
 
 # https://github.com/ansible/ansible/issues/16612
 - name: RedHat selinux facts
-  when: ansible_os_family == "RedHat"
+  when: ansible_facts['os_family'] == "RedHat"
   block:
     - name: Debug | ansible_selinux
       ansible.builtin.debug:
@@ -74,7 +74,7 @@
         state: present
       register: pkg_result
       until: pkg_result is success
-      when: ansible_distribution_major_version | int < 8
+      when: ansible_facts['distribution_major_version'] | int < 8
 
     - name: RedHat8+ | Ensure selinux dependencies are present
       ansible.builtin.package:
@@ -85,7 +85,7 @@
         state: present
       register: pkg_result
       until: pkg_result is success
-      when: ansible_distribution_major_version | int >= 8
+      when: ansible_facts['distribution_major_version'] | int >= 8
 
     - name: Recollect ansible facts
       ansible.builtin.setup:
@@ -95,7 +95,7 @@
 
 - name: RedHat selinux
   when: >
-    ansible_os_family == "RedHat" and
+    ansible_facts['os_family'] == "RedHat" and
     ansible_selinux.status is defined and
     ansible_selinux.status != 'disabled'
   block:
